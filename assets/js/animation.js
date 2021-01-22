@@ -16,10 +16,10 @@ let petal1 = new mojs.Shape({
     radiusY: 11.80,
     fill: '#00FDFF',
     scale: {
-        0: 8
+        0: 12
     },
     duration: 1000,
-    delay: 1500,
+    delay: 12000,
     easing: 'cubic.in',
 
 })
@@ -29,10 +29,10 @@ let petal2 = new mojs.Shape({
     radiusX: 2.5,
     radiusY: 12.79,
     scale: {
-        0: 8
+        0: 12
     },
     duration: 1000,
-    delay: 1500,
+    delay: 12000,
     easing: 'cubic.in',
 
     angle: {
@@ -49,10 +49,10 @@ let petal3 = new mojs.Shape({
     radiusX: 2.5,
     radiusY: 12.79,
     scale: {
-        0: 8
+        0: 12
     },
     duration: 1000,
-    delay: 1500,
+    delay: 12000,
     easing: 'cubic.in',
 
     angle: {
@@ -69,10 +69,13 @@ let petal4 = new mojs.Shape({
     radiusX: 2.5,
     radiusY: 12.79,
     scale: {
-        0: 8
+        0: 12
+    },
+    angle: {
+        0: 180
     },
     duration: 1000,
-    delay: 1500,
+    delay: 12000,
     easing: 'cubic.in',
     strokeDashoffset: {
         '-100%': '100%'
@@ -85,13 +88,13 @@ let petal5 = new mojs.Shape({
     radiusX: 2.5,
     radiusY: 12.79,
     scale: {
-        0: 8
+        0: 12
     },
     angle: {
         0: 45
     },
     duration: 1000,
-    delay: 1500,
+    delay: 12000,
     easing: 'cubic.in',
     strokeDashoffset: {
         '-100%': '100%'
@@ -104,13 +107,13 @@ let petal6 = new mojs.Shape({
     radiusX: 2.5,
     radiusY: 12.79,
     scale: {
-        0: 8
+        0: 12
     },
     angle: {
-        0: 270
+        0: 130
     },
     duration: 1000,
-    delay: 1500,
+    delay: 12000,
     easing: 'cubic.in',
     strokeDashoffset: {
         '-100%': '100%'
