@@ -752,6 +752,100 @@ const whirlB = new mojs.Shape({
     radius: 60
 });
 
+
+let rect = new mojs.Shape({
+    parent: zeParent,
+    shape: 'rect',
+    fill: '#D70000',
+    stroke: '#F00000',
+    scale: 0.7,
+    top: {
+        '0%': '130%'
+    },
+    left: '15%',
+    duration: 4000,
+    //     scale: {
+    //         0: 4.24,
+    //         easing: 'cubic.in'
+    //     },
+    angle: {
+        0: 135
+    },
+})
+
+let rect2 = new mojs.Shape({
+    parent: zeParent,
+    shape: 'rect',
+    fill: '#D70000',
+    stroke: '#F00000',
+    scale: 0.7,
+    top: {
+        '0%': '130%'
+    },
+    left: '85%',
+    duration: 4000,
+    //     scale: {
+    //         0: 4.24,
+    //         easing: 'cubic.in'
+    //     },
+    angle: {
+        135: 0
+    },
+})
+
+const burstB2 = new mojs.Burst({
+    parent: zeParent,
+    radius: {
+        25: 75
+    },
+    count: 50,
+    left: '15%',
+    top: '105%',
+    duration: 4000,
+    children: {
+        // property map - maps over children with mod function
+        shape: ['rect'],
+        // property map - maps over children with mod function
+        fill: ['#D70000', '#CA0000', '#E41414'],
+        angle: {
+            0: 180
+        },
+        // rand string - generates random value for every child rand( min, max )
+        degreeShift: 'rand(-360, 360)',
+        // stagger string( start, step ) for every child
+        delay: 'stagger(5, 5)',
+        repeat: 30000,
+        duration: 2000,
+        delay: 3000,
+    }
+})
+
+const burstA2 = new mojs.Burst({
+    parent: zeParent,
+    radius: {
+        25: 75
+    },
+    count: 50,
+    left: '85%',
+    top: '105%',
+    duration: 4000,
+    children: {
+        // property map - maps over children with mod function
+        shape: ['rect'],
+        // property map - maps over children with mod function
+        fill: ['#D70000', '#CA0000', '#E41414'],
+        angle: {
+            0: 180
+        },
+        // rand string - generates random value for every child rand( min, max )
+        degreeShift: 'rand(-360, 360)',
+        // stagger string( start, step ) for every child
+        delay: 'stagger(5, 5)',
+        duration: 2000,
+        delay: 3000,
+    }
+})
+
 // La timeline
 const timeline = new mojs.Timeline({
         repeat: 999
@@ -793,7 +887,11 @@ const timeline = new mojs.Timeline({
     .add(circleK1)
     .add(circleL1)
     .add(circleM1)
-    .add(burstA, circleA, whirlB);
+    .add(burstA, circleA, whirlB)
+    .add(rect)
+    .add(rect2)
+    .add(burstB2)
+    .add(burstA2)
 
 window.addEventListener('load', function () {
 
@@ -809,7 +907,7 @@ window.addEventListener('load', function () {
         }
         burstA.tune(coords);
         circleA.tune(coords);
-        whirlA.tune(coords);
+        whirlB.tune(coords);
         timeline.replay()
     }, 1000)
     circleA1.tune(coords);
@@ -827,26 +925,26 @@ window.addEventListener('load', function () {
 
 });
 
-anime({
-    targets: '.staggering-axis-grid-demo .el',
-    translateX: anime.stagger(10, {
-        grid: [14, 5],
-        from: 'center',
-        axis: 'x'
-    }),
-    translateY: anime.stagger(10, {
-        grid: [14, 5],
-        from: 'center',
-        axis: 'y'
-    }),
-    rotateZ: anime.stagger([0, 90], {
-        grid: [14, 5],
-        from: 'center',
-        axis: 'x'
-    }),
-    delay: anime.stagger(200, {
-        grid: [14, 5],
-        from: 'center'
-    }),
-    easing: 'easeInOutQuad'
-});
+// anime({
+//     targets: '.staggering-axis-grid-demo .el',
+//     translateX: anime.stagger(10, {
+//         grid: [14, 5],
+//         from: 'center',
+//         axis: 'x'
+//     }),
+//     translateY: anime.stagger(10, {
+//         grid: [14, 5],
+//         from: 'center',
+//         axis: 'y'
+//     }),
+//     rotateZ: anime.stagger([0, 90], {
+//         grid: [14, 5],
+//         from: 'center',
+//         axis: 'x'
+//     }),
+//     delay: anime.stagger(200, {
+//         grid: [14, 5],
+//         from: 'center'
+//     }),
+//     easing: 'easeInOutQuad'
+// });
