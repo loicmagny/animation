@@ -1,450 +1,253 @@
-// Initialisation des letiables
+// Initialisation des variables
 let zeParent = document.querySelector("#animProjection"); // le conteneur de l'animation
-let isPlaying = true // booléen - indique si l'animation (et la musique) sont jouées
-let music = new Howl({
-    src: ['assets/mp3/potsu-letting-go.wav'],
-    autoplay: false,
-    loop: true,
-    volume: 0.5,
-});
+let isPlaying = false // booléen - indique si l'animation (et la musique) sont jouées
+let music = new Audio('assets/mp3/potsu-letting-go.wav') // objet HTMLAudioElement (cf. MDN)
+let coordsinit = {
+  x: 'rand(-700,700)',
+  y:'rand(-300,300)',
+}
+let idinterval;
 
-
-let petal1 = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    radiusX: 2.5,
-    radiusY: 11.80,
-    fill: '#00FDFF',
-    scale: {
-        0: 12
-    },
-    duration: 1000,
-    delay: 12000,
-    easing: 'cubic.in',
-
-})
-let petal2 = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    radiusX: 2.5,
-    radiusY: 12.79,
-    scale: {
-        0: 12
-    },
-    duration: 1000,
-    delay: 12000,
-    easing: 'cubic.in',
-
-    angle: {
-        0: 90
-    },
-    strokeDashoffset: {
-        '100%': '-100%'
-    },
-})
-let petal3 = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    fill: '#FF6800',
-    radiusX: 2.5,
-    radiusY: 12.79,
-    scale: {
-        0: 12
-    },
-    duration: 1000,
-    delay: 12000,
-    easing: 'cubic.in',
-
-    angle: {
-        0: 90
-    },
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
-})
-let petal4 = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    fill: 'blue',
-    radiusX: 2.5,
-    radiusY: 12.79,
-    scale: {
-        0: 12
-    },
-    angle: {
-        0: 180
-    },
-    duration: 1000,
-    delay: 12000,
-    easing: 'cubic.in',
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
-})
-let petal5 = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    fill: 'yellow',
-    radiusX: 2.5,
-    radiusY: 12.79,
-    scale: {
-        0: 12
-    },
-    angle: {
-        0: 45
-    },
-    duration: 1000,
-    delay: 12000,
-    easing: 'cubic.in',
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
-})
-let petal6 = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    fill: 'yellow',
-    radiusX: 2.5,
-    radiusY: 12.79,
-    scale: {
-        0: 12
-    },
-    angle: {
-        0: 130
-    },
-    duration: 1000,
-    delay: 12000,
-    easing: 'cubic.in',
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
-})
-
-const burst = new mojs.Burst({
-    radius: 100,
-    scale: {
-        0: 4.5
-    },
-    delay: 5000,
-    count: 10,
-    children: {
-        shape: 'polygon',
-        points: 5,
-        fill: {
-            'red': 'yellow'
-        },
-        angle: {
-            360: 0
-        },
-        duration: 3000,
-        delay: 5000
-    }
-});
-
-const burst1 = new mojs.Burst({
-    radius: {
-        0: 100
-    },
-    count: 10,
-    children: {
-        shape: 'polygon',
-        points: 5,
-        fill: {
-            'cyan': 'red'
-        },
-        angle: {
-            360: 0
-        },
-        duration: 1000,
-        delay: 'stagger(0, 1000)'
-    }
-});
-
-const burst4 = new mojs.Burst({
-    top: '25%',
-    radius: {
-        0: 100
-    },
-    count: 10,
-    children: {
-        shape: 'polygon',
-        points: 5,
-        fill: {
-            'cyan': 'red'
-        },
-        angle: {
-            360: 0
-        },
-        duration: 1000,
-        delay: 'stagger(0, 100)'
-    }
-});
-
-const burst5 = new mojs.Burst({
-    top: '75%',
-    radius: {
-        0: 100
-    },
-    count: 10,
-    children: {
-        shape: 'polygon',
-        points: 5,
-        fill: {
-            'cyan': 'red'
-        },
-        angle: {
-            360: 0
-        },
-        duration: 1000,
-        delay: 'stagger(0, 100)'
-    }
-});
-
-const burst2 = new mojs.Burst({
-    radius: {
-        0: 100
-    },
-    count: 10,
-    left: '65%',
-    children: {
-        shape: 'polygon',
-        points: 5,
-        fill: {
-            'cyan': 'yellow'
-        },
-        angle: {
-            360: 0
-        },
-        duration: 1000,
-        delay: 'stagger(0, 100)'
-    }
-});
-
-const burst3 = new mojs.Burst({
-    left: '35%',
-    radius: {
-        0: 100
-    },
-    count: 10,
-    children: {
-        shape: 'polygon',
-        points: 5,
-        fill: {
-            'purple': 'yellow'
-        },
-        angle: {
-            360: 0
-        },
-        duration: 1000,
-        delay: 'stagger(0, 100)'
-    }
-});
-
+// Les shapes...
 let circleA = new mojs.Shape({
-    parent: zeParent,
-    shape: 'circle',
-    fill: {
-        'white': 'transparent'
-    },
-    strokeWidth: {
-        0: 2
-    },
-    stroke: 'white',
-    scale: {
-        0: 5
-    },
-
-    duration: 15000,
-    delay: 1000,
-    easing: 'cubic.out',
+  parent: zeParent,
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 2
+  },
+  duration: 1300,
+  delay: 700,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
 });
 let circleB = new mojs.Shape({
-    shape: 'circle',
-    fill: {
-        'white': 'transparent'
-    },
-    strokeWidth: {
-        0: 2
-    },
-    stroke: 'white',
-    scale: {
-        0: 3.5
-    },
-    duration: 12000,
-    delay: 100,
-    easing: 'cubic.in',
-    angle: {
-        0: 90
-    },
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.5
+  },
+  duration: 800,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
 });
-let squareB = new mojs.Shape({
-    shape: 'rect',
-    fill: {
-        'white': 'transparent'
-    },
-    strokeWidth: {
-        0: 2
-    },
-    stroke: 'white',
-    scale: {
-        0: 3.5
-    },
-    duration: 12000,
-    delay: 100,
-    easing: 'cubic.in',
-    angle: {
-        0: 45
-    },
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
+let circleC = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 1.5
+  },
+  duration: 600,
+  delay: 600,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
 });
-let squareC = new mojs.Shape({
-    shape: 'rect',
-    fill: {
-        'white': 'transparent'
-    },
-    strokeWidth: {
-        0: 2
-    },
-    stroke: 'white',
-    scale: {
-        0: 3.5
-    },
-    duration: 12000,
-    delay: 100,
-    easing: 'cubic.in',
-    angle: {
-        0: 75
-    },
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
+let circleD = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 2
+  },
+  duration: 1000,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
+let circleE = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.2
+  },
+  duration: 600,
+  delay: 600,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
 });
 
-let squareD = new mojs.Shape({
-    shape: 'rect',
+let circleF = new mojs.Burst({
+  radius: {
+    0: 100
+  },
+  count: 1500,
+  children: {
+    shape: 'polygon',
+    points: 10,
+    radius: 10,
     fill: {
-        'white': 'transparent'
+      'yellow': 'red'
     },
-    strokeWidth: {
-        0: 2
-    },
-    stroke: 'white',
-    scale: {
-        0: 3.5
-    },
-    duration: 12000,
-    delay: 100,
-    easing: 'cubic.in',
     angle: {
-        0: 15
+      360: 0
     },
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
+    duration: 2000,
+    delay: 'stagger( rand(0, 200) )'
+  },
+
 });
-const CircleA = new mojs.Shape({
-    shape: 'circle',
-    right: '40%',
-    fill: 'black',
-    radius: 50,
-    stroke: {
-        'rgba(0,255,255, 1)': 'magenta'
-    },
-    strokeWidth: {
-        15: 5
-    },
-    strokeDasharray: '100%',
-    strokeDashoffset: {
-        '-100%': '100%',
-        easing: 'circ.in'
-    },
-    angle: {
-        0: 360
-    },
+// let circleG = new mojs.Burst({
 
-    duration: 6000,
-    repeat: 999,
-}).play();
+// });
+let circleH = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 2
+  },
+  duration: 900,
+  delay: 900,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
+let circleI = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.5
+  },
+  duration: 1000,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
+let circleJ = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.5
+  },
+  duration: 1000,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
+let circleK = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.5
+  },
+  duration: 1000,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
+let circleL = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.5
+  },
+  duration: 1000,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
+let circleM = new mojs.Shape({
+  ...coordsinit,
+  shape: 'circle',
+  scale: {
+    0: 0.5
+  },
+  duration: 1000,
+  delay: 1000,
+  easing: 'cubic.out',
+  repeat: 999,
+  fill: 'transparent',
+  stroke: {
+    'yellow': 'red'
+  },
+});
 
-
-const CircleB = new mojs.Shape({
-    shape: 'rect',
-    left: '70%',
-    fill: 'black',
-    radius: 50,
-    stroke: {
-        'rgba(0,255,255, 1)': 'magenta'
-    },
-    strokeWidth: {
-        15: 5
-    },
-    strokeDasharray: '100%',
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
-    angle: {
-        0: 360
-    },
-
-    duration: 6000,
-    repeat: 999,
-}).play();
-
-
-const CircleC = new mojs.Shape({
-    shape: 'rect',
-    left: '60%',
-    fill: 'black',
-    radius: 50,
-    stroke: {
-        'red': 'blue'
-    },
-    strokeWidth: {
-        15: 5
-    },
-    strokeDasharray: '15%',
-    strokeDashoffset: {
-        '-100%': '100%'
-    },
-    angle: {
-        0: 360
-    },
-
-    duration: 6000,
-    repeat: 999,
-}).play();
 
 // La timeline
 const timeline = new mojs.Timeline({
-        repeat: 999
-    })
-    .add(petal2)
-    .add(petal3)
-    .add(petal4)
-    .add(petal5)
-    .add(petal6)
-    .add(circleA)
-    .add(circleB)
-    .add(squareB)
-    .add(squareC)
-    .add(squareD)
-    .add(burst, burst1, burst2, burst3, burst4, burst5)
-    .add(circleA)
-    .add(circleB)
-    .add(squareB)
-    .add(squareC)
-    .add(squareD)
-    .add(CircleA)
-    .add(CircleB)
-    .add(CircleC)
+    repeat: 999,
+  })
+  .add(circleA) // Chaque animation est ajoutée à la timeline
+  .add(circleB)
+  .add(circleC)
+  .add(circleD)
+  .add(circleE)
+  .add(circleF)
+  // .add(circleG)
+  .add(circleH)
+  .add(circleI)
+  .add(circleK)
+  .add(circleL)
+  .add(circleM)
 
-window.addEventListener('load', function () {
+document.querySelector("#animProjection").addEventListener("click", function () {
 
-    timeline.replay()
+  if (isPlaying != true) {
+    music.play()
+    idinterval = setInterval(function () {
+      coords = {
+        x: 'rand(-500,500)',
+        y: 'rand(-300,300)'
+      }
+      circleA.tune(coords);
+      circleB.tune(coords);
+      circleC.tune(coords);
+      circleD.tune(coords);
+      circleE.tune(coords);
+      // circleG.tune(coords);
+      circleH.tune(coords);
+      circleI.tune(coords);
+      circleJ.tune(coords);
+      circleK.tune(coords);
+      circleL.tune(coords);
+      circleM.tune(coords);
+      timeline.replay()
+    }, 2300);
+    timeline.play()
+    isPlaying = true
+} else {
+    music.pause()
+    timeline.pause()
+    clearInterval(idinterval)
+    isPlaying = false
+}
 
 });
