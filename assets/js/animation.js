@@ -1,6 +1,6 @@
 // Initialisation des letiables
 let zeParent = document.querySelector("#animProjection"); // le conteneur de l'animation
-let isPlaying = false // booléen - indique si l'animation (et la musique) sont jouées
+let isPlaying = true // booléen - indique si l'animation (et la musique) sont jouées
 let music = new Howl({
     src: ['assets/mp3/potsu-letting-go.wav'],
     autoplay: false,
@@ -8,36 +8,12 @@ let music = new Howl({
     volume: 0.5,
 });
 
-window.onload = function () {
-    document.getElementById('display-4').color = 'blue';
-};
 
-let circle = new mojs.Shape({
-    parent: zeParent,
-    Shape: 'circle',
-    fill: 'transparent',
-    stroke: '#FF6800',
-    strokeWidth: 4.25,
-    scale: {
-        0: 1
-    },
-    duration: 1000,
-    delay: 1000,
-    scale: {
-        0: 4.24,
-        easing: 'cubic.in'
-    },
-    angle: {
-        0: 135
-    },
-})
 let petal1 = new mojs.Shape({
     parent: zeParent,
     Shape: 'circle',
     radiusX: 2.5,
     radiusY: 11.80,
-    left: 427,
-    top: 131,
     fill: '#00FDFF',
     scale: {
         0: 8
@@ -52,8 +28,6 @@ let petal2 = new mojs.Shape({
     Shape: 'circle',
     radiusX: 2.5,
     radiusY: 12.79,
-    left: 326,
-    top: 230,
     scale: {
         0: 8
     },
@@ -74,8 +48,6 @@ let petal3 = new mojs.Shape({
     fill: '#FF6800',
     radiusX: 2.5,
     radiusY: 12.79,
-    left: 528,
-    top: 230,
     scale: {
         0: 8
     },
@@ -96,8 +68,6 @@ let petal4 = new mojs.Shape({
     fill: 'blue',
     radiusX: 2.5,
     radiusY: 12.79,
-    left: 427,
-    top: 340,
     scale: {
         0: 8
     },
@@ -114,8 +84,6 @@ let petal5 = new mojs.Shape({
     fill: 'yellow',
     radiusX: 2.5,
     radiusY: 12.79,
-    left: 350,
-    top: 309,
     scale: {
         0: 8
     },
@@ -135,8 +103,6 @@ let petal6 = new mojs.Shape({
     fill: 'yellow',
     radiusX: 2.5,
     radiusY: 12.79,
-    left: 350,
-    top: 309,
     scale: {
         0: 8
     },
@@ -454,8 +420,6 @@ const CircleC = new mojs.Shape({
 const timeline = new mojs.Timeline({
         repeat: 999
     })
-    .add(circle)
-    .add(petal1)
     .add(petal2)
     .add(petal3)
     .add(petal4)
@@ -476,16 +440,8 @@ const timeline = new mojs.Timeline({
     .add(CircleB)
     .add(CircleC)
 
-document.querySelector("#animProjection").addEventListener("click", function () {
+window.addEventListener('load', function () {
 
-    if (isPlaying != true) {
-        music.play()
-        timeline.play()
-        isPlaying = true
-    } else {
-        music.pause()
-        timeline.pause()
-        isPlaying = false
-    }
+    timeline.replay()
 
 });
