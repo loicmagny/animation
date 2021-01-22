@@ -418,6 +418,83 @@ const CircleC = new mojs.Shape({
     duration: 6000,
     repeat: 999,
 }).play();
+const swirlright = new mojs.ShapeSwirl({
+    y:              { 0: -150 },
+    radius:         8,
+    degreeShift:    90,
+    duration:       595,
+
+    fill: {'orange' :'blue'},
+  }
+  );
+  const swirltop = new mojs.ShapeSwirl({
+    
+    x:              { 0: -100 },
+    y:              { 0: -200 },
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: {'purple' : 'grey' },
+  });
+  const swirltopright = new mojs.ShapeSwirl({
+    
+    y:              { 0: 100 },
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: {'green':'grey'}, 
+ });
+  const swirlleft = new mojs.ShapeSwirl({
+    y:              { 0: 500 },
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: { 'blue': 'red' },
+  });
+  const swirlleftbot = new mojs.ShapeSwirl({
+    y:              { 0: -450 },
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: { 'cyan' :'purple'},  
+});
+  const swirltopleft = new mojs.ShapeSwirl({
+    y:              { 0: 500 },
+    x:               {0: 400},
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: { 'red' : 'green'},  
+});
+  const swirlbotright = new mojs.ShapeSwirl({
+    y:              { 0: 500 },
+    x:               {0: -400},
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: { 'cyan' :'magenta' },  
+});
+  const swirlleftleft = new mojs.ShapeSwirl({
+    x:               {0: -400},
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+
+    fill: {'orange' :'grey'}, 
+ });
+  const swirlrightright = new mojs.ShapeSwirl({
+    x:               {0: 271},
+    radius:         8,
+    pathScale:      .5,
+    duration:       595,
+    fill: {'cyan' :'purple' }, 
+ });
 
 // La timeline
 const timeline = new mojs.Timeline({
@@ -442,6 +519,15 @@ const timeline = new mojs.Timeline({
     .add(CircleA)
     .add(CircleB)
     .add(CircleC)
+    .add (swirlright)
+    .add (swirltop)
+    .add (swirltopright)
+    .add (swirlleft)
+    .add (swirlleftbot)
+    .add (swirltopleft)
+    .add (swirlbotright)
+    .add (swirlleftleft)
+    .add (swirlrightright)
 
 window.addEventListener('load', function () {
 
